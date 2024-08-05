@@ -38,22 +38,25 @@
 </head>
 
 <body>
+    <div style="background-color: white;">
     <div>
-        <h1 style="display:flex;justify-content:center; font-size: 30px; margin-bottom: 40px; margin-top: 30px;">Battle
+        <h1 style=" display:flex;justify-content:center; font-size: 30px; margin-bottom: 40px;">Battle
             Team
             Arena</h1>
     </div>
+    <div style="display: flex;justify-content: center;">
+        <!-- <h1 style="margin-top: 30px; border: 4px solid yellow;">All Heroes</h1> -->
+        <a href="./index.html" style="margin-right: 10px">All heroes</a>
+        <a href="./assets/js/data/arena.html" id="go-to-arena-link" style="margin-right: 10px">Go to the Arena</a>
+        <a href="./assets/js/data/frame.html" id="go-to-arena-link" style="margin-right: 10px">fall frame </a>
+    </div>
+</div>
 
     <!-- // Add Navigation Links for Improved User Access -->
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <div>
-            <!-- <h1 style="margin-top: 30px; border: 4px solid yellow;">All Heroes</h1> -->
-            <a href="./index.html" style="margin-right: 10px">All heroes</a>
-            <a href="./assets/js/data/arena.html" id="go-to-arena-link" style="margin-right: 10px">Go to the Arena</a>
-            <a href="./assets/js/data/frame.html" id="go-to-arena-link" style="margin-right: 10px">fall frame </a>
-        </div>
+    <div style="display: flex; flex-direction: column; align-items: center;width: 90vw;margin: auto;">
+       
 
-        <div style="margin: 30px;  padding: 20px; display: inline-block;">
+        <div style="padding: 20px 0; display: inline-block;background-color: white;width: 90vw;margin: auto;text-align: center;">
 
             <label for="hero-filter" style="margin-right: 10px;">Name</label>
             <input type="text" id="hero-filter" placeholder="Filter heroes by name...">
@@ -108,9 +111,13 @@
             <button id="filter-button">Filter</button>
         </div>
     </div>
+
     <!-- Create Heroes and Draft Booster Lists for Display -->
-    <div id="heroes-list"></div>
-    <div id="draft-booster-list"></div>
+     <div class="card-container">
+        <div id="heroes-list"></div>
+     </div>
+  
+    <div id="draft-booster-list" style="display: none;"></div>
 
 
     <script>
