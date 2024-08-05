@@ -17367,23 +17367,60 @@ document.addEventListener("DOMContentLoaded", () => {
       imageElement.alt = hero.name + " Image";
       heroCard.appendChild(imageElement);
 
-      const speedElement = document.createElement("p");
-      speedElement.textContent = `Speed: ${hero.powerstats.speed}`;
-      heroCard.appendChild(speedElement);
-      const powerElement = document.createElement("p");
-      powerElement.textContent = `Power: ${hero.powerstats.power}`;
-      heroCard.appendChild(powerElement);
-      const combatElement = document.createElement("p");
-      combatElement.textContent = `Combat: ${hero.powerstats.combat}`;
-      heroCard.appendChild(combatElement);
+      // const speedElement = document.createElement("p");
+      // speedElement.textContent = `Speed: ${hero.powerstats.speed}`;
+      // heroCard.appendChild(speedElement);
+      // const powerElement = document.createElement("p");
+      // powerElement.textContent = `Power: ${hero.powerstats.power}`;
+      // heroCard.appendChild(powerElement);
+      // const combatElement = document.createElement("p");
+      // combatElement.textContent = `Combat: ${hero.powerstats.combat}`;
+      // heroCard.appendChild(combatElement);
 
-      const strengthElement = document.createElement("p");
-      strengthElement.textContent = `Strength: ${hero.powerstats.strength}`;
-      heroCard.appendChild(strengthElement);
+      // const strengthElement = document.createElement("p");
+      // strengthElement.textContent = `Strength: ${hero.powerstats.strength}`;
+      // heroCard.appendChild(strengthElement);
 
-      const intelligenceElement = document.createElement("p");
-      intelligenceElement.textContent = `Intelligence: ${hero.powerstats.intelligence}`;
-      heroCard.appendChild(intelligenceElement);
+      // const intelligenceElement = document.createElement("p");
+      // intelligenceElement.textContent = `Intelligence: ${hero.powerstats.intelligence}`;
+      // heroCard.appendChild(intelligenceElement);
+
+
+    // change the powersats container
+      // Helper function to create a label-value pair container
+function createLabelValuePair(labelText, valueText) {
+  const container = document.createElement("div");
+  container.classList.add("label-value-container"); // Add a class for styling
+
+  const labelDiv = document.createElement("div");
+  labelDiv.classList.add("label"); // Add a class for the label
+  labelDiv.textContent = labelText;
+  container.appendChild(labelDiv);
+
+  const valueDiv = document.createElement("div");
+  valueDiv.classList.add("value"); // Add a class for the value
+  valueDiv.textContent = valueText;
+  container.appendChild(valueDiv);
+
+  return container;
+}
+
+// Create and append each label-value pair
+const speedContainer = createLabelValuePair("Speed:", hero.powerstats.speed);
+heroCard.appendChild(speedContainer);
+
+const powerContainer = createLabelValuePair("Power:", hero.powerstats.power);
+heroCard.appendChild(powerContainer);
+
+const combatContainer = createLabelValuePair("Combat:", hero.powerstats.combat);
+heroCard.appendChild(combatContainer);
+
+const strengthContainer = createLabelValuePair("Strength:", hero.powerstats.strength);
+heroCard.appendChild(strengthContainer);
+
+const intelligenceContainer = createLabelValuePair("Intelligence:", hero.powerstats.intelligence);
+heroCard.appendChild(intelligenceContainer);
+
 
       // Calculate and add priority and attack/defense values
       const priorityValue = Math.ceil(

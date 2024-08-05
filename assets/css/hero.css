@@ -22,15 +22,15 @@ body {
 .hero-card {
   background-color: #f9f9f9;
   border: 1px solid black;
-  padding: 15px;
-  width: 130px; /* Increased width for additional content */
+  padding: 5px;
+  width: 150px; /* Increased width for additional content */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  text-align: left; /* Left align text */
   display: flex;
   flex-direction: column;
   position: relative; /* For positioning of bottom elements */
   margin-top: 10px;
 }
+
 /* add hover effect  */
 
 .hero-card:hover {
@@ -47,20 +47,50 @@ body {
   align-items: center;
   margin-bottom: 10px;
   font-size: 0.9em;
+  font-weight: bold;
 }
 
-/* //Refine Hero Card Design for Better Visual Appeal */
-.hero-card img {
-  width: 138px; /* Change this value to adjust width */
-  height: 190px; /* Change this value to adjust height */
-  margin: auto;
-}
 
-.hero-card p {
-  margin-top: 5px;
+/*style the cost span */
+.hero-card .header span {
+  background-color: black;
+  border-radius: 50%;
+  color: white;
+  padding: 5px;
+  width: 20px;
+  height: 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  font-size: 12px;
 }
+/* Refine Hero Card Design for Better Visual Appeal */
+.hero-card img {
+  width: 100%; /* Change this value to adjust width */
+  height: auto; /* Change this value to adjust height */
+  margin-bottom: 10px;
+  padding: auto;
+  object-fit: contain;
+}
+
+
+/* style the powerstats section */
+.label-value-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #EBEBEB;
+  padding: 2px;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.value {
+  text-align: right;
+}
+
 
 /* Style for bottom section */
 .hero-card .bottom-section {
