@@ -17496,13 +17496,36 @@ function filterAndSortHeroes() {
     );
   }
 
-  // Sort the filtered heroes by the selected attribute
-  filteredHeroes.sort((a, b) => {
-    const valueA = getAttributeValue(a, attribute) || 0;
-    const valueB = getAttributeValue(b, attribute) || 0;
-
-    return sortOrder === "asc" ? valueA - valueB : valueB - valueA;
-  });
+// Sort the filtered heroes by the selected attribute
+filteredHeroes.sort((a, b) => {
+  const valueA = getAttributeValue(a, attribute);
+  const valueB = getAttributeValue(b, attribute);
+  
+  // Custom sorting for 'cost' attribute
+  if (attribute === 'cost') {
+    return sortOrder === "asc"
+      ? calculateCost(a) - calculateCost(b)
+      : calculateCost(b) - calculateCost(a);
+  }
+  // Custom sorting for 'cost' attribute
+  if (attribute === 'priority') {
+    return sortOrder === "asc"
+      ? calculatePriority(a) - calculatePriority(b)
+      : calculatePriority(b) - calculatePriority(a);
+  }
+  
+  
+  // Handling string and number comparisons
+  if (typeof valueA === 'string' && typeof valueB === 'string') {
+    return sortOrder === "asc"
+      ? valueA.localeCompare(valueB)
+      : valueB.localeCompare(valueA);
+  } else if (typeof valueA === 'number' && typeof valueB === 'number') {
+    return sortOrder === "asc"
+      ? valueA - valueB
+      : valueB - valueA;
+  }
+});
 
   console.log(
     "sorting the heroes on the basis of attribute ",
