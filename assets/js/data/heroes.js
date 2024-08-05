@@ -17389,16 +17389,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // change the powersats container
       // Helper function to create a label-value pair container
 function createLabelValuePair(labelText, valueText) {
+
   const container = document.createElement("div");
-  container.classList.add("label-value-container"); // Add a class for styling
+  container.classList.add("label-value-container");
 
   const labelDiv = document.createElement("div");
-  labelDiv.classList.add("label"); // Add a class for the label
+  labelDiv.classList.add("label");
   labelDiv.textContent = labelText;
   container.appendChild(labelDiv);
 
   const valueDiv = document.createElement("div");
-  valueDiv.classList.add("value"); // Add a class for the value
+  valueDiv.classList.add("value"); 
   valueDiv.textContent = valueText;
   container.appendChild(valueDiv);
 

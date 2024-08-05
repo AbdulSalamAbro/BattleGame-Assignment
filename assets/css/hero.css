@@ -56,13 +56,14 @@ body {
   background-color: black;
   border-radius: 50%;
   color: white;
-  padding: 5px;
+  padding: 3px;
   width: 20px;
   height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 12px;
+  font-weight: 500;
 }
 /* Refine Hero Card Design for Better Visual Appeal */
 .hero-card img {
@@ -75,11 +76,14 @@ body {
 
 
 /* style the powerstats section */
+.pwstatsContainer {
+  background-color: black;
+}
 .label-value-container {
   display: flex;
   justify-content: space-between;
   background-color: #EBEBEB;
-  padding: 2px;
+  padding:3px 8px;
 }
 
 .label {
@@ -88,6 +92,7 @@ body {
 }
 
 .value {
+  font-size: 12px;
   text-align: right;
 }
 
@@ -107,4 +112,45 @@ body {
   margin-top: 15px;
   display: flex;
   flex-direction: column;
+  font-weight: 700;
+}
+/* Style the search bar */
+input {
+  border: 2px solid rgb(223, 216, 216);
+  padding: 5px; /* Red border with 1px width */
+  font-size: 16px;
+  font-weight: 400; /* Font weight for the select dropdown */
+}
+/* Style the select element */
+select {
+  font-size: 16px; /* Font size for the select dropdown */
+  font-weight: 400; /* Font weight for the select dropdown */
+  padding: 5px; /* Padding inside the select box */
+  border: 2px solid rgb(223, 216, 216);
+  border-radius: 4px; /* Rounds the corners */
+  background-color: white; /* Background color */
+  color: rgb(50, 50, 50); /* Text color */
+  appearance: none; /* Removes default styling */
+  -webkit-appearance: none; /* Removes default styling for WebKit browsers */
+  -moz-appearance: none; /* Removes default styling for Mozilla browsers */
+  cursor: pointer; /* Changes the cursor to a pointer */
+}
+
+/* Style the option elements */
+select option {
+  font-weight: 400; /* Font weight for options */
+  font-size: 16px; /* Font size for options */
+  padding: 5px; /* Padding for options (not always supported) */
+}
+
+/* Style the select dropdown for better appearance (optional) */
+select::-ms-expand {
+  display: none; /* Hides the default dropdown arrow in IE and Edge */
+}
+
+label {
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0 5px;
+  border-radius: 4px; /* Rounds the corners */
 }
