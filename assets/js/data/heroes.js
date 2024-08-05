@@ -17328,6 +17328,7 @@ const heroes = [
 // });
 
 // Initialize DOM Elements and Event Listeners on Page Load
+
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize DOM Elements and Event Listeners on Page Load
   const heroesList = document.getElementById("heroes-list");
@@ -17344,7 +17345,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to render the list of heroes
   function renderHeroes(heroesToRender) {
     heroesList.innerHTML = "";
-    const heroesToDisplay = getRandomHeroes(getConfigSelection(), heroesToRender);
+    const heroesToDisplay = heroesToRender.slice(0, getConfigSelection());
     heroesToDisplay.forEach((hero) => {
       // Create a div to hold the hero card
       const heroCard = document.createElement("div");
@@ -17358,7 +17359,13 @@ document.addEventListener("DOMContentLoaded", () => {
       headerElement.appendChild(nameElement);
 
       const codeElement = document.createElement("span");
-      codeElement.textContent = `${Math.ceil(Math.random() * 100)}`; // Assuming 'code' is an alias
+            // Calculate and add priority and attack/defense values
+           calculatePriority(hero)
+
+            calculateAttack(hero)
+            calculateDefense(hero)
+            calculateCost(hero)
+      codeElement.textContent = calculateCost(hero);
       headerElement.appendChild(codeElement);
       heroCard.appendChild(headerElement);
 
@@ -17374,28 +17381,6 @@ document.addEventListener("DOMContentLoaded", () => {
       heroCard.appendChild(aligRaceElement);
 
 
-
-      // const speedElement = document.createElement("p");
-      // speedElement.textContent = `Speed: ${hero.powerstats.speed}`;
-      // heroCard.appendChild(speedElement);
-      // const powerElement = document.createElement("p");
-      // powerElement.textContent = `Power: ${hero.powerstats.power}`;
-      // heroCard.appendChild(powerElement);
-      // const combatElement = document.createElement("p");
-      // combatElement.textContent = `Combat: ${hero.powerstats.combat}`;
-      // heroCard.appendChild(combatElement);
-
-      // const strengthElement = document.createElement("p");
-      // strengthElement.textContent = `Strength: ${hero.powerstats.strength}`;
-      // heroCard.appendChild(strengthElement);
-
-      // const intelligenceElement = document.createElement("p");
-      // intelligenceElement.textContent = `Intelligence: ${hero.powerstats.intelligence}`;
-      // heroCard.appendChild(intelligenceElement);
-
-
-    // change the powersats container
-      // Helper function to create a label-value pair container
 function createLabelValuePair(labelText, valueText) {
 
   const container = document.createElement("div");
@@ -17432,34 +17417,19 @@ const intelligenceContainer = createLabelValuePair("Intelligence:", hero.powerst
 heroCard.appendChild(intelligenceContainer);
 
 
-      // Calculate and add priority and attack/defense values
-      const priorityValue = Math.ceil(
-        (hero.appearance.weight + hero.appearance.height) / 50
-      );
-      const attackValue = Math.ceil(
-        (hero.powerstats.strength +
-          hero.powerstats.combat +
-          hero.powerstats.power) /
-          30
-      );
-      const defenseValue = Math.ceil(
-        (hero.powerstats.intelligence +
-          hero.powerstats.durability +
-          hero.powerstats.speed) /
-          30
-      );
+
 
       const bottomSection = document.createElement("div");
       bottomSection.classList.add("bottom-section");
 
       const priorityElement = document.createElement("div");
       priorityElement.classList.add("priority");
-      priorityElement.innerHTML = `${priorityValue}`;
+      priorityElement.innerHTML = calculatePriority(hero);
       bottomSection.appendChild(priorityElement);
 
       const attackDefenseElement = document.createElement("div");
       attackDefenseElement.classList.add("attack-defense");
-      attackDefenseElement.innerHTML = `${attackValue} / ${defenseValue}`;
+      attackDefenseElement.innerHTML = `${calculateAttack(hero)} / ${calculateDefense(hero)}`;
       bottomSection.appendChild(attackDefenseElement);
 
       heroCard.appendChild(bottomSection);
@@ -17487,70 +17457,87 @@ heroCard.appendChild(intelligenceContainer);
     return value;
   }
 
-  // Function to filter and sort heroes
-  function filterAndSortHeroes() {
-    const filterText = heroFilter.value.toLowerCase();
-    const attribute = attributeDropdown.value;
-    const sortOrder = sortDropdown.value;
-    const selectedRace = raceDropdown.value;
-    const selectedAlignments = [];
 
-    if (alignmentGood.checked) selectedAlignments.push("good");
-    if (alignmentBad.checked) selectedAlignments.push("bad");
-    if (alignmentNeutral.checked) selectedAlignments.push("neutral");
 
-    console.log(
-      "Alignment ; ",
-      selectedAlignments.map((x) => x)
+
+// Function to filter and sort heroes
+function filterAndSortHeroes() {
+  const filterText = heroFilter.value.toLowerCase();
+  const attribute = attributeDropdown.value;
+  const sortOrder = sortDropdown.value;
+  const selectedRace = raceDropdown.value;
+  const selectedAlignments = [];
+
+  if (alignmentGood.checked) selectedAlignments.push("good");
+  if (alignmentBad.checked) selectedAlignments.push("bad");
+  if (alignmentNeutral.checked) selectedAlignments.push("neutral");
+
+  console.log(
+    "Alignment ; ",
+    selectedAlignments.map((x) => x)
+  );
+  var filteredHeroes = heroes;
+
+  if (filterText) {
+    filteredHeroes = heroes.filter((hero) =>
+      hero.name.toLowerCase().includes(filterText)
     );
-    var filteredHeroes = heroes;
-    if (filterText) {
-      filteredHeroes = heroes.filter((hero) =>
-        hero.name.toLowerCase().includes(filterText)
-      );
-    }
-
-    if (selectedRace && selectedRace !== "All") {
-      filteredHeroes = filteredHeroes.filter(
-        (hero) => hero.appearance.race === selectedRace
-      );
-    }
-
-    if (selectedAlignments.length > 0) {
-      filteredHeroes = filteredHeroes.filter((hero) =>
-        selectedAlignments.includes(hero.biography.alignment)
-      );
-    }
-    // Sort the filtered heroes by the selected attribute
-    filteredHeroes.sort((a, b) => {
-      const valueA = getAttributeValue(a, attribute) || 0;
-      const valueB = getAttributeValue(b, attribute) || 0;
-
-      return sortOrder === "asc" ? valueA - valueB : valueB - valueA;
-    });
-
-    console.log(
-      "sorting the heroes on the basis of attribute ",
-      filteredHeroes.map((hero) => hero[attribute])
-    );
-
-    // Render the filtered and sorted heroes
-    renderHeroes(filteredHeroes.slice(0, getConfigSelection()));
   }
 
-  let heroesToRender = heroes.slice(0, getConfigSelection());
-  renderHeroes(heroesToRender);
+  if (selectedRace && selectedRace !== "All") {
+    filteredHeroes = filteredHeroes.filter(
+      (hero) => hero.appearance.race === selectedRace
+    );
+  }
 
-  // Add event listener to filter input
-  heroFilter.addEventListener("input", filterAndSortHeroes);
+  if (selectedAlignments.length > 0) {
+    filteredHeroes = filteredHeroes.filter((hero) =>
+      selectedAlignments.includes(hero.biography.alignment)
+    );
+  }
 
-  // Add event listeners to dropdowns and filter button to filter and sort heroes
-  attributeDropdown.addEventListener("change", filterAndSortHeroes);
-  sortDropdown.addEventListener("change", filterAndSortHeroes);
-  filterButton.addEventListener("click", filterAndSortHeroes);
+  // Sort the filtered heroes by the selected attribute
+  filteredHeroes.sort((a, b) => {
+    const valueA = getAttributeValue(a, attribute) || 0;
+    const valueB = getAttributeValue(b, attribute) || 0;
 
-  raceDropdown.addEventListener("change", filterAndSortHeroes);
-  // Display a random selection of 5 heroes in the draft booster
+    return sortOrder === "asc" ? valueA - valueB : valueB - valueA;
+  });
+
+  console.log(
+    "sorting the heroes on the basis of attribute ",
+    filteredHeroes.map((hero) => hero[attribute])
+  );
+
+  // Render the filtered and sorted heroes
+  renderHeroes(filteredHeroes.slice(0, 20));
+}
+
+// Initial rendering of heroes
+let heroesToRender = heroes.slice(0, getConfigSelection());
+renderHeroes(heroesToRender);
+
+// Add event listener to filter input
+heroFilter.addEventListener("input", () => {
+  // Trigger filtering by text only
+  filterAndSortHeroes();
+});
+
+// Add event listeners to dropdowns and filter button to filter and sort heroes
+filterButton.addEventListener("click", filterAndSortHeroes);
+
+
+attributeDropdown.addEventListener("change", () => {
+  // Use the filter button to trigger filtering
+});
+sortDropdown.addEventListener("change", () => {
+  // Use the filter button to trigger filtering
+});
+raceDropdown.addEventListener("change", () => {
+  // Use the filter button to trigger filtering
+});
+
+  // Display a random selection of a num of heroes in the draft booster
   const draftHeroes = getRandomHeroes(getConfigBooster());
   draftHeroes.forEach((hero) => {
     const heroCard = document.createElement("div");
