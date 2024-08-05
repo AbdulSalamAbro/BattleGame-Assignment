@@ -17444,6 +17444,9 @@ heroCard.appendChild(intelligenceContainer);
     const shuffled = heroes.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, num);
   }
+  
+const shuffledHeroes = getRandomHeroes(getConfigSelection());
+renderHeroes(shuffledHeroes);
 
   function getAttributeValue(hero, attributePath) {
     const keys = attributePath.split(".");
@@ -17495,7 +17498,11 @@ function filterAndSortHeroes() {
       selectedAlignments.includes(hero.biography.alignment)
     );
   }
-
+  function renderRandomHeroes(num) {
+    const randomHeroes = getRandomHeroes(num);
+    renderHeroes(randomHeroes);
+  }
+  renderRandomHeroes(getConfigSelection())
 // Sort the filtered heroes by the selected attribute
 filteredHeroes.sort((a, b) => {
   const valueA = getAttributeValue(a, attribute);
