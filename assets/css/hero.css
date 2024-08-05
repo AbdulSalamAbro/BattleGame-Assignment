@@ -73,7 +73,12 @@ body {
   padding: auto;
   object-fit: contain;
 }
-
+/*add race and alignment to the card */
+.aligRace {
+  min-height: 20px;
+  max-height: fit-content;
+  margin-top: -8px;
+}
 
 /* style the powerstats section */
 .pwstatsContainer {
@@ -123,17 +128,13 @@ input {
 }
 /* Style the select element */
 select {
-  font-size: 16px; /* Font size for the select dropdown */
-  font-weight: 400; /* Font weight for the select dropdown */
-  padding: 5px; /* Padding inside the select box */
-  border: 2px solid rgb(223, 216, 216);
-  border-radius: 4px; /* Rounds the corners */
-  background-color: white; /* Background color */
-  color: rgb(50, 50, 50); /* Text color */
-  appearance: none; /* Removes default styling */
-  -webkit-appearance: none; /* Removes default styling for WebKit browsers */
-  -moz-appearance: none; /* Removes default styling for Mozilla browsers */
-  cursor: pointer; /* Changes the cursor to a pointer */
+  font-size: 16px;
+  font-weight: 400;
+  padding: 5px;
+  border: 2px solid #E5E3E1;
+  background-color: white;
+  color: rgb(50, 50, 50);
+  cursor: pointer; 
 }
 
 /* Style the option elements */
@@ -141,11 +142,12 @@ select option {
   font-weight: 400; /* Font weight for options */
   font-size: 16px; /* Font size for options */
   padding: 5px; /* Padding for options (not always supported) */
+  background-color: #E5E3E1;
 }
 
 /* Style the select dropdown for better appearance (optional) */
 select::-ms-expand {
-  display: none; /* Hides the default dropdown arrow in IE and Edge */
+  display: block; /* Hides the default dropdown arrow in IE and Edge */
 }
 
 label {

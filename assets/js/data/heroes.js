@@ -17344,7 +17344,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to render the list of heroes
   function renderHeroes(heroesToRender) {
     heroesList.innerHTML = "";
-    const heroesToDisplay = heroesToRender.slice(0, 20);
+    const heroesToDisplay = getRandomHeroes(getConfigSelection(), heroesToRender);
     heroesToDisplay.forEach((hero) => {
       // Create a div to hold the hero card
       const heroCard = document.createElement("div");
@@ -17366,6 +17366,14 @@ document.addEventListener("DOMContentLoaded", () => {
       imageElement.src = hero.image.url;
       imageElement.alt = hero.name + " Image";
       heroCard.appendChild(imageElement);
+
+
+      const aligRaceElement = document.createElement("p");
+      aligRaceElement.classList.add('aligRace')
+      aligRaceElement.innerText = `${hero.biography.alignment} ${hero.appearance.race}`;
+      heroCard.appendChild(aligRaceElement);
+
+
 
       // const speedElement = document.createElement("p");
       // speedElement.textContent = `Speed: ${hero.powerstats.speed}`;
@@ -17400,6 +17408,7 @@ function createLabelValuePair(labelText, valueText) {
 
   const valueDiv = document.createElement("div");
   valueDiv.classList.add("value"); 
+
   valueDiv.textContent = valueText;
   container.appendChild(valueDiv);
 
@@ -17526,11 +17535,11 @@ heroCard.appendChild(intelligenceContainer);
     );
 
     // Render the filtered and sorted heroes
-    renderHeroes(filteredHeroes.slice(0, 20));
+    renderHeroes(filteredHeroes.slice(0, getConfigSelection()));
   }
 
-  // Initial render of 20 heroes
-  renderHeroes(heroes.slice(0, 20));
+  let heroesToRender = heroes.slice(0, getConfigSelection());
+  renderHeroes(heroesToRender);
 
   // Add event listener to filter input
   heroFilter.addEventListener("input", filterAndSortHeroes);
@@ -17542,7 +17551,7 @@ heroCard.appendChild(intelligenceContainer);
 
   raceDropdown.addEventListener("change", filterAndSortHeroes);
   // Display a random selection of 5 heroes in the draft booster
-  const draftHeroes = getRandomHeroes(5);
+  const draftHeroes = getRandomHeroes(getConfigBooster());
   draftHeroes.forEach((hero) => {
     const heroCard = document.createElement("div");
     heroCard.classList.add("hero-card");
@@ -17559,5 +17568,9 @@ heroCard.appendChild(intelligenceContainer);
     draftBoosterList.appendChild(heroCard);
   });
 });
+
+// Assuming config.js defines getConfigAmount, getConfigTotalCost, getConfigTotalPriority, etc.
+
+// Example usage:
 
 export default heroes;
